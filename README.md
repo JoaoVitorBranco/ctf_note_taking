@@ -43,6 +43,5 @@ My firsts CTFs were done without taking notes, and I regret it a lot. I had to d
 - adding word notes
 
 ## CTF 
-- BufferOverflowPrep
 - Flatline
 - UltraTech
