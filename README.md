@@ -44,4 +44,3 @@ My firsts CTFs were done without taking notes, and I regret it a lot. I had to d
 
 ## CTF 
 - Flatline
-- UltraTech
