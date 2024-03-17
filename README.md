@@ -10,23 +10,15 @@ My firsts CTFs were done without taking notes, and I regret it a lot. I had to d
 
 ## TryHackMe
 - AllInOne
-- BasicPentesting
 - Bolt
-- Brooklyn99
 - DailyBugle
-- Ignite
 - Internal
-- JuiceDetails
 - Kenobi
 - MetasploitExploitation
-- MrRobot
 - Overpass2
-- PickleRick
 - relevant
-- RootMe
 - SteelMountain
 - TheMarketplace
-- tomghost
 - WindowsPrivEsc
 
 # TODO

