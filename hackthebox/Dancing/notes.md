@@ -1,3 +1,6 @@
+# Link
+- https://app.hackthebox.com/starting-point
+
 # Questions
 
 ## What does the 3-letter acronym SMB stand for?

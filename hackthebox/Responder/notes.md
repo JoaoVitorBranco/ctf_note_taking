@@ -1,3 +1,6 @@
+# Link
+- https://app.hackthebox.com/starting-point
+
 # Questions
 
 ## When visiting the web service using the IP address, what is the domain that we are being redirected to?
