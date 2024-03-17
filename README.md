@@ -29,14 +29,6 @@ My firsts CTFs were done without taking notes, and I regret it a lot. I had to d
 - tomghost
 - WindowsPrivEsc
 
-## picoCTF
-- Addadshashanammu
-- cookies
-- information
-- Qs
-- Static
-- Stonks
-
 # TODO
 
 ## Repo Tasks
