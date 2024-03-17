@@ -39,7 +39,6 @@ My firsts CTFs were done without taking notes, and I regret it a lot. I had to d
 # TODO
 
 ## Repo Tasks
-- adding the link to the CTF in the notes
 - adding word notes
 
 ## CTF 
