@@ -2,7 +2,8 @@
 This repo stores my note tanking while doing some CTFs. I'm trying to learn the better practices to do while note taking, and getting more and more CTFs to practice is helping me a lot 😁
 
 # Obs
-I'm not sharing the flags that I got in the CTFs, only the notes that I took while doing them. 
+1. I'm not sharing the flags that I got in the CTFs, only the notes that I took while doing them. 
+2. These are my note-taking files, not the write-ups, so they won't tell you how to solve the CTFs, only my notes while doing them.
 
 # Before Note Taking ☹
 My firsts CTFs were done without taking notes, and I regret it a lot. I had to do some CTFs again to take notes, and I'm still doing some CTFs again to take notes. They are:
